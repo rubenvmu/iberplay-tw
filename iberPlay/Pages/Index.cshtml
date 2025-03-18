@@ -4,7 +4,187 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IberCaja - Cuenta Vamos</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            background: #f8f9fa;
+            color: #212529;
+            line-height: 1.6;
+        }
+
+        /* Encabezado */
+        header {
+            background: #ffffff;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0 0 0;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        nav a {
+            color: #495057;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #212529;
+        }
+
+        /* Contenido principal */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Secciones */
+        .product-info, .risk-indicator, .deposit-guarantee, .cta {
+            background: #ffffff;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        h1, h2, h3 {
+            color: #212529;
+            margin-top: 0;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Botones */
+        button {
+            background: #343a40;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin: 0.5rem 0;
+        }
+
+        button:hover {
+            background: #212529;
+        }
+
+        /* Indicador de riesgo */
+        .risk-indicator p:first-of-type {
+            color: #868e96;
+        }
+
+        .risk-indicator p:nth-of-type(2) {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        /* Garantía de depósitos */
+        .deposit-guarantee {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+        }
+
+        /* CTA destacado */
+        .cta {
+            background: #212529;
+            color: white;
+        }
+
+        .cta h3 {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .cta strong {
+            color: #adb5bd;
+        }
+
+        /* Pie de página */
+        footer {
+            background: #343a40;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        /* Textos pequeños */
+        small {
+            color: #868e96;
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PARTICULARES</h1>
+        <nav>
+            <ul>
+                <li><a href="#">EMPRESAS</a></li>
+                <li><a href="#">BARCA PERSONAL</a></li>
+                <li><a href="#">BARCA PRIVADA</a></li>
+                <li><a href="#">TU DINERO CON CORAZÓN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="product-info">
+            <h2>IberCaja</h2>
+            <p>Cuentas y Tarjetas</p>
+            <p>Ahorro e Inversión</p>
+            <p>Seguros</p>
+            <p>Hipotecas y Préstamos</p>
+            <button>Hazte cliente</button>
+            <button>Acceso clientes</button>
+        </section>
+
+        <section class="risk-indicator">
+            <p>El indicador de riesgo corresponde a la Cuenta Vamos.</p>
+            <p>1/6</p>
+            <p>Este número es indicativo del riesgo del producto, siendo 1/6 indicativo de menor riesgo y 6/6 de mayor riesgo</p>
+        </section>
+
+        <section class="deposit-guarantee">
+            <p>Increída se encuentra adherida al Fondo de Garantía de Depósitos de Entidades de Crédito de España (RDL 16121). El importe máximo garantizado es de hasta 300.000 euros por depositante en cada entidad de crédito.</p>
+        </section>
+
+        <section class="cta">
+            <h3>Si tu banco ya no te va, ven a la Cuenta Vamos¹</h3>
+            <p>¡Trae tu nómina y vamos!</p>
+            <p>Hasta 1.400€</p>
+            <p>Primer año <strong>TAE 5,09%²</strong> y segundo año <strong>TAE 2,01%³</strong> para los primeros 20.000€ de saldo.</p>
+            <button>Más información</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 IberCaja. Todos los derechos reservados.</p>
+        <small>1/6 Este número es indicativo del riesgo del producto, siendo 1/6 indicativo de menor riesgo y 6/6 de mayor riesgo</small>
+    </footer>
+</body>

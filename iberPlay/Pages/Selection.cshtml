@@ -1,0 +1,97 @@
+﻿@page
+@model MyApp.Namespace.SelectionModel
+@{
+}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educación Financiera - IberCaja</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            background: white;
+            color: #212529;
+            line-height: 1.6;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+
+        h2 {
+            color: #212529;
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            font-weight: 800;
+        }
+
+        .botones-container {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .boton {
+            padding: 1.5rem 3rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            border: 3px solid;
+            background-color: rgba(255,255,255,0.9);
+        }
+
+        .boton:hover {
+            transform: translateY(-3px);
+        }
+
+        .estudiante {
+            border-color: #2ecc71;
+            background-color: #e8f6ee;
+            color: #27ae60;
+        }
+
+        .emprendedor {
+            border-color: #3498db;
+            background-color: #e3f2fd;
+            color: #2980b9;
+        }
+
+        .inversionista {
+            border-color: #e74c3c;
+            background-color: #fdedec;
+            color: #c0392b;
+        }
+
+        .recordatorio {
+            color: #666;
+            font-size: 0.95rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <h2>Selecciona la ruta de educación financiera que te interesa y obten certificaciones por ello</h2>
+        
+        <div class="botones-container">
+            <button class="boton estudiante">Estudiante</button>
+            <button class="boton emprendedor">Emprendedor</button>
+            <button class="boton inversionista">Inversionista</button>
+        </div>
+
+        <p class="recordatorio">
+            Recuerda que con el set de cartas físicas de iberPlay! puedes aprender a la vez que superas de forma más sencilla los niveles.
+        </p>
+    </div>
+</body>
+

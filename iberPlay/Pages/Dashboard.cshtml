@@ -1,0 +1,212 @@
+﻿@page
+@model MyApp.Namespace.DashboardModel
+@{
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Financiero</title>
+    <style>
+        :root {
+            --verde: #8BC34A;
+            --azul: #42A5F5;
+            --naranja: #FFB74D;
+            --rojo: #EF5350;
+            --gris: #607D8B;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #F5F5F5;
+        }
+
+        .contenedor {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Barra de Nivel */
+        .barra-nivel {
+            background: #E0E0E0;
+            border-radius: 20px;
+            padding: 10px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .nivel {
+            background: linear-gradient(90deg, var(--verde) 20%, var(--azul));
+            width: 45%;
+            height: 20px;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .marcadores-nivel {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            color: var(--gris);
+            font-weight: bold;
+        }
+
+        /* Sección de Métricas */
+        .grid-metricas {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .metrica {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .metrica h3 {
+            margin: 0 0 10px 0;
+            color: var(--gris);
+            font-size: 14px;
+        }
+
+        .metrica .valor {
+            font-size: 24px;
+            font-weight: bold;
+            color: #37474F;
+        }
+
+        /* Minijuegos y Alertas */
+        .seccion-juegos {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .minijuegos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .juego {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px dashed var(--azul);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .juego:hover {
+            transform: translateY(-3px);
+        }
+
+        .alertas {
+            background: #FFF3E0;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid var(--naranja);
+        }
+
+        .alerta-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Elementos Decorativos */
+        .icono {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .emoji {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <!-- Barra de Nivel -->
+        <div class="barra-nivel">
+            <div class="nivel"></div>
+            <div class="marcadores-nivel">
+                <span>Nivel 1</span>
+                <span>Nivel 5</span>
+            </div>
+        </div>
+
+        <!-- Métricas Financieras -->
+        <div class="grid-metricas">
+            <div class="metrica">
+                <h3>Saldo</h3>
+                <div class="valor">€0</div>
+            </div>
+            <div class="metrica">
+                <h3>Ingresos</h3>
+                <div class="valor">€0</div>
+            </div>
+            <div class="metrica">
+                <h3>Gastos</h3>
+                <div class="valor">€0</div>
+            </div>
+            <div class="metrica">
+                <h3>% Ahorro</h3>
+                <div class="valor">0%</div>
+            </div>
+            <div class="metrica">
+                <h3>Seguridad</h3>
+                <div class="valor">🛡️ 0%</div>
+            </div>
+        </div>
+
+        <!-- Sección Juegos y Alertas -->
+        <div class="seccion-juegos">
+            <div class="minijuegos">
+                <div class="juego">
+                    <div class="icono" style="background: #E1F5FE">🎯</div>
+                    <h3>Misión Compras</h3>
+                    <p>Optimiza tu tienda</p>
+                </div>
+                <div class="juego">
+                    <div class="icono" style="background: #F1F8E9">💰</div>
+                    <h3>Reto Ahorro</h3>
+                    <p>Reduce gastos</p>
+                </div>
+                <div class="juego">
+                    <div class="icono" style="background: #FFECB3">🛡️</div>
+                    <h3>Defensa Segura</h3>
+                    <p>Protege tu cuenta</p>
+                </div>
+            </div>
+
+            <!-- Alertas de Seguridad -->
+            <div class="alertas">
+                <h2>🔔 Alertas de Seguridad</h2>
+                <div class="alerta-item">
+                    <span class="emoji">⚠️</span>
+                    <div>
+                        <h4>Misión de Verificación</h4>
+                        <p>Completa la autenticación</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

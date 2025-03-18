@@ -172,7 +172,7 @@
             </div>
             <div class="metrica">
                 <h3>Seguridad</h3>
-                <div class="valor">🛡️ 0%</div>
+                <<div class="valor">🛡️@Model.Seguridad%</div>
             </div>
         </div>
 
@@ -196,17 +196,44 @@
                 </div>
             </div>
 
-            <!-- Alertas de Seguridad -->
-            <div class="alertas">
-                <h2>🔔 Alertas de Seguridad</h2>
-                <div class="alerta-item">
-                    <span class="emoji">⚠️</span>
-                    <div>
-                        <h4>Misión de Verificación</h4>
-                        <p>Completa la autenticación</p>
-                    </div>
-                </div>
+        
+            <div class="container">
+    <!-- Mostrar el valor de seguridad -->
+    <div class="metrica">
+        <h3>Seguridad</h3>
+        <div class="valor">🛡️ @Model.Seguridad%</div>
+    </div>
+
+    <!-- Alerta de seguridad -->
+    <div class="alertas">
+        <h2>🔔 Alertas de Seguridad</h2>
+        <div class="alerta-item">
+            <span class="emoji">⚠️</span>
+            <div>
+                <h4>Misión de Verificación</h4>
+                <p>Completa la autenticación</p>
             </div>
+        </div>
+    </div>
+
+    <!-- Alerta de SMS (oculta inicialmente) -->
+    <div id="alerta-sms" style="display: none;">
+        <p>Has recibido un SMS sospechoso: "¡Has ganado un Samsung Galaxy! Pulsa este enlace: <a href="#">linkmalicioso.com</a>"</p>
+        <form method="post">
+            <button type="submit" name="accion" value="clicar-enlace">Clicar enlace</button>
+            <button type="submit" name="accion" value="desechar-sms">Desechar SMS</button>
+        </form>
+    </div>
+
+    <!-- Botón para mostrar la alerta de SMS -->
+    <button onclick="mostrarAlertaSMS()">Mostrar Alerta</button>
+</div>
+
+<script>
+    function mostrarAlertaSMS() {
+        document.getElementById("alerta-sms").style.display = "block";
+    }
+</script>
         </div>
     </div>
 </body>

@@ -1,3 +1,9 @@
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Seleccionar un puerto aleatorio
@@ -12,6 +18,8 @@ builder.Services.AddSession(options =>
 });
 
 builder.Services.AddRazorPages();
+
+builder.Services.AddDataProtection().DisableAutomaticKeyGeneration();
 
 var app = builder.Build();
 

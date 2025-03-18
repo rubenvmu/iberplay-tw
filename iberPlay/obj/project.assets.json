@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/rubenvmu/iberplay-tw/iberPlay/iberPlay.csproj",
+      "projectUniqueName": "/Users/rubenvmu/rty/iberplay-tw/iberPlay/iberPlay.csproj",
       "projectName": "iberPlay",
-      "projectPath": "/Users/rubenvmu/iberplay-tw/iberPlay/iberPlay.csproj",
+      "projectPath": "/Users/rubenvmu/rty/iberplay-tw/iberPlay/iberPlay.csproj",
       "packagesPath": "/Users/rubenvmu/.nuget/packages/",
-      "outputPath": "/Users/rubenvmu/iberplay-tw/iberPlay/obj/",
+      "outputPath": "/Users/rubenvmu/rty/iberplay-tw/iberPlay/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/rubenvmu/.nuget/NuGet/NuGet.Config"

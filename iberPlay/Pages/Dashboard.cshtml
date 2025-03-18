@@ -3,6 +3,8 @@
 @{
 }
 
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -139,6 +141,42 @@
         .emoji {
             font-size: 24px;
         }
+
+        /* Popup */
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .popup-contenido {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .cerrar {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .cerrar:hover,
+        .cerrar:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -148,7 +186,7 @@
             <div class="nivel"></div>
             <div class="marcadores-nivel">
                 <span>Nivel 1</span>
-                <span>Nivel 5</span>
+                <span>Nivel 10</span>
             </div>
         </div>
 
@@ -156,35 +194,35 @@
         <div class="grid-metricas">
             <div class="metrica">
                 <h3>Saldo</h3>
-                <div class="valor">€0</div>
+                <div class="valor" id="saldo">€0</div>
             </div>
             <div class="metrica">
                 <h3>Ingresos</h3>
-                <div class="valor">€0</div>
+                <div class="valor" id="ingresos">€0</div>
             </div>
             <div class="metrica">
                 <h3>Gastos</h3>
-                <div class="valor">€0</div>
+                <div class="valor" id="gastos">€0</div>
             </div>
             <div class="metrica">
                 <h3>% Ahorro</h3>
-                <div class="valor">0%</div>
+                <div class="valor" id="ahorro">0%</div>
             </div>
             <div class="metrica">
                 <h3>Seguridad</h3>
-                <<div class="valor">🛡️@Model.Seguridad%</div>
+                <div class="valor" id="seguridad">🛡️ 0%</div>
             </div>
         </div>
 
         <!-- Sección Juegos y Alertas -->
         <div class="seccion-juegos">
             <div class="minijuegos">
-                <div class="juego">
+                <div class="juego" onclick="mostrarPopup('Misión Compras', '¿Cuál es la mejor estrategia para optimizar tus compras y reducir costos a largo plazo?', 'Comprar en grandes cantidades para obtener descuentos por volumen', 'Analizar y comparar precios de diferentes proveedores', 'ahorro')">
                     <div class="icono" style="background: #E1F5FE">🎯</div>
                     <h3>Misión Compras</h3>
                     <p>Optimiza tu tienda</p>
                 </div>
-                <div class="juego">
+                <div class="juego" onclick="mostrarPopup('Reto Ahorro', '¿Cuál es la mejor manera de ahorrar dinero y maximizar tus ingresos?', 'Invertir en acciones de alto riesgo', 'Crear un fondo de emergencia y diversificar tus inversiones', 'ahorro')">
                     <div class="icono" style="background: #F1F8E9">💰</div>
                     <h3>Reto Ahorro</h3>
                     <p>Reduce gastos</p>
@@ -196,44 +234,82 @@
                 </div>
             </div>
 
-        
             <div class="container">
-    <!-- Mostrar el valor de seguridad -->
-    <div class="metrica">
-        <h3>Seguridad</h3>
-        <div class="valor">🛡️ @Model.Seguridad%</div>
-    </div>
+                <!-- Mostrar el valor de seguridad -->
+                <div class="metrica">
+                    <h3>Seguridad</h3>
+                    <div class="valor" id="seguridad">🛡️ 0%</div>
+                </div>
 
-    <!-- Alerta de seguridad -->
-    <div class="alertas">
-        <h2>🔔 Alertas de Seguridad</h2>
-        <div class="alerta-item">
-            <span class="emoji">⚠️</span>
-            <div>
-                <h4>Misión de Verificación</h4>
-                <p>Completa la autenticación</p>
+                <!-- Alerta de seguridad -->
+                <div class="alertas">
+                    <h2>🔔 Alertas de Seguridad</h2>
+                    <div class="alerta-item">
+                        <span class="emoji">⚠️</span>
+                        <div>
+                            <h4>Misión de Verificación</h4>
+                            <p>Completa la autenticación</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alerta de SMS (oculta inicialmente) -->
+                <div id="alerta-sms" style="display: none;">
+                    <p>Has recibido un SMS sospechoso: "¡Has ganado un Samsung Galaxy! Pulsa este enlace: <a href="#">linkmalicioso.com</a>"</p>
+                    <button onclick="actualizarSeguridad(false)">Clicar enlace</button>
+                    <button onclick="actualizarSeguridad(true)">Desechar SMS</button>
+                </div>
+
+                <!-- Botón para mostrar la alerta de SMS -->
+                <button onclick="mostrarAlertaSMS()">Mostrar Alerta</button>
             </div>
         </div>
     </div>
 
-    <!-- Alerta de SMS (oculta inicialmente) -->
-    <div id="alerta-sms" style="display: none;">
-        <p>Has recibido un SMS sospechoso: "¡Has ganado un Samsung Galaxy! Pulsa este enlace: <a href="#">linkmalicioso.com</a>"</p>
-        <form method="post">
-            <button type="submit" name="accion" value="clicar-enlace">Clicar enlace</button>
-            <button type="submit" name="accion" value="desechar-sms">Desechar SMS</button>
-        </form>
-    </div>
-
-    <!-- Botón para mostrar la alerta de SMS -->
-    <button onclick="mostrarAlertaSMS()">Mostrar Alerta</button>
-</div>
-
-<script>
-    function mostrarAlertaSMS() {
-        document.getElementById("alerta-sms").style.display = "block";
-    }
-</script>
+    <!-- Popup -->
+    <div id="popup" class="popup">
+        <div class="popup-contenido">
+            <span class="cerrar" onclick="cerrarPopup()">&times;</span>
+            <h2 id="popup-titulo"></h2>
+            <p id="popup-pregunta"></p>
+            <button id="respuesta-correcta" onclick="verificarRespuesta(false)"></button>
+            <button id="respuesta-incorrecta" onclick="verificarRespuesta(true)"></button>
         </div>
     </div>
+
+    <script>
+        function mostrarPopup(titulo, pregunta, respuestaCorrecta, respuestaIncorrecta, metrica) {
+            document.getElementById('popup-titulo').innerText = titulo;
+            document.getElementById('popup-pregunta').innerText = pregunta;
+            document.getElementById('respuesta-correcta').innerText = respuestaCorrecta;
+            document.getElementById('respuesta-incorrecta').innerText = respuestaIncorrecta;
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('respuesta-correcta').setAttribute('data-metrica', metrica);
+            document.getElementById('respuesta-incorrecta').setAttribute('data-metrica', metrica);
+        }
+
+        function cerrarPopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        function verificarRespuesta(esCorrecta) {
+            const metrica = esCorrecta ? document.getElementById('respuesta-incorrecta').getAttribute('data-metrica') : document.getElementById('respuesta-correcta').getAttribute('data-metrica');
+            const valorActual = parseFloat(document.getElementById(metrica).innerText);
+            const nuevoValor = esCorrecta ? valorActual + 10 : valorActual - 10;
+            document.getElementById(metrica).innerText = nuevoValor + '%';
+            cerrarPopup();
+        }
+
+        function mostrarAlertaSMS() {
+            document.getElementById("alerta-sms").style.display = "block";
+        }
+
+        function actualizarSeguridad(esCorrecta) {
+            const valorActual = parseFloat(document.getElementById('seguridad').innerText.replace('🛡️ ', ''));
+            const nuevoValor = esCorrecta ? valorActual + 10 : valorActual - 10;
+            document.getElementById('seguridad').innerText = '🛡️ ' + nuevoValor + '%';
+            document.getElementById("alerta-sms").style.display = "none";
+        }
+    </script>
 </body>
+</html>

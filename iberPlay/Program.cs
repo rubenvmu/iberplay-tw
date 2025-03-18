@@ -1,9 +1,12 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Habilitar sesiones
+// Seleccionar un puerto aleatorio
+var randomPort = new Random().Next(5000, 9000);
+builder.WebHost.UseUrls($"http://localhost:{randomPort}");
+
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(20); // Tiempo de expiración de la sesión
+    options.IdleTimeout = TimeSpan.FromMinutes(20);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
@@ -21,9 +24,11 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-app.UseSession(); // Habilitar el middleware de sesiones
+app.UseSession();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+Console.WriteLine($"Servidor iniciado en http://localhost:{randomPort}");
 
 app.Run();

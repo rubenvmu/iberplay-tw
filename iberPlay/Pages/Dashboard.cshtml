@@ -3,8 +3,7 @@
 @{
 }
 
-<!DOCTYPE html>
-<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -86,7 +85,7 @@
         /* Minijuegos y Alertas */
         .seccion-juegos {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 
             gap: 20px;
         }
 
@@ -111,10 +110,12 @@
         }
 
         .alertas {
-            background: #FFF3E0;
+            background: white;
             padding: 20px;
             border-radius: 12px;
-            border-left: 5px solid var(--naranja);
+            border: 2px dashed #000; /* Borde negro */
+            text-align: center;
+            transition: transform 0.2s;
         }
 
         .alerta-item {
@@ -125,6 +126,13 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            border: 2px dashed #000; /* Borde negro */
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .alerta-item:hover {
+            transform: translateY(-3px);
         }
 
         /* Elementos Decorativos */
@@ -177,24 +185,98 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        /* Popup */
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .popup-contenido {
+            width: 600px;
+            height: 300px;
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            position: relative;
+            transition: transform 0.2s;
+            overflow: auto; /* Para que el texto no se salga del recuadro */
+        }
+
+        /* Estilo similar a .juego, pero con borde negro en lugar de azul */
+        .alerta-seguridad {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px dashed #000; /* Borde negro */
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin: 10px 0; /* Separación entre alertas */
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .alerta-seguridad:hover {
+            transform: translateY(-3px);
+        }
+
+        .nivel-y-avatar {
+            display: flex;
+            align-items: center;
+            gap: 30px; /* Ajusta el espacio entre la barra y el avatar */
+            margin-bottom: 30px;
+        }
+        .avatar-contenedor {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #000; /* Borde negro para destacar */
+        }
     </style>
 </head>
-<body>
+
     <div class="contenedor">
         <!-- Barra de Nivel -->
-        <div class="barra-nivel">
-            <div class="nivel"></div>
-            <div class="marcadores-nivel">
-                <span>Nivel 1</span>
-                <span>Nivel 10</span>
+        <div class="nivel-y-avatar">
+            <!-- Avatar con enlace y nombre de usuario al lado izquierdo -->
+            <div class="avatar-contenedor">
+                <a href="https://example.com/perfil" target="_blank">
+                    <img class="avatar" src="https://phlebotomycareertraining.com/wp-content/uploads/2023/11/default-avatar-photo-placeholder-icon-grey-vector-38519922-e1699300466746.jpg" alt="Avatar" />
+                </a>
+                <p>iberPlay2012</p>
+            </div>
+
+            <!-- Barra de nivel ocupa el resto del espacio -->
+            <div class="barra-nivel" style="flex: 1;">
+                <div class="nivel"></div>
+                <div class="marcadores-nivel">
+                    <span>Nivel 1</span>
+                    <span>Nivel 9</span>
+                </div>
             </div>
         </div>
 
         <!-- Métricas Financieras -->
         <div class="grid-metricas">
             <div class="metrica">
-                <h3>Saldo</h3>
-                <div class="valor" id="saldo">€0</div>
+                <h3>Ibercoins</h3>
+                <div class="valor" id="ibercoins">€100</div>
             </div>
             <div class="metrica">
                 <h3>Ingresos</h3>
@@ -202,82 +284,103 @@
             </div>
             <div class="metrica">
                 <h3>Gastos</h3>
-                <div class="valor" id="gastos">€0</div>
+                <div class="valor" id="gastos">€10</div>
             </div>
             <div class="metrica">
                 <h3>% Ahorro</h3>
-                <div class="valor" id="ahorro">0%</div>
+                <div class="valor" id="ahorro">15%</div>
             </div>
             <div class="metrica">
                 <h3>Seguridad</h3>
-                <div class="valor" id="seguridad">🛡️ 0%</div>
+                <div class="valor" id="seguridad">🛡️ 100%</div>
             </div>
         </div>
 
         <!-- Sección Juegos y Alertas -->
         <div class="seccion-juegos">
             <div class="minijuegos">
-                <div class="juego" onclick="mostrarPopup('Misión Compras', '¿Cuál es la mejor estrategia para optimizar tus compras y reducir costos a largo plazo?', 'Comprar en grandes cantidades para obtener descuentos por volumen', 'Analizar y comparar precios de diferentes proveedores', 'ahorro')">
+                <div class="juego" onclick="mostrarPopup('Compras', '¿Cuál es la mejor estrategia para optimizar tus compras y reducir costos a largo plazo?', 'Comprar en grandes cantidades para obtener descuentos por volumen', 'Analizar y comparar precios de diferentes proveedores', 'ahorro')">
                     <div class="icono" style="background: #E1F5FE">🎯</div>
-                    <h3>Misión Compras</h3>
+                    <h3>Compras</h3>
                     <p>Optimiza tu tienda</p>
                 </div>
                 <div class="juego" onclick="mostrarPopup('Reto Ahorro', '¿Cuál es la mejor manera de ahorrar dinero y maximizar tus ingresos?', 'Invertir en acciones de alto riesgo', 'Crear un fondo de emergencia y diversificar tus inversiones', 'ahorro')">
                     <div class="icono" style="background: #F1F8E9">💰</div>
-                    <h3>Reto Ahorro</h3>
-                    <p>Reduce gastos</p>
+                    <h3>Ahorro</h3>
+                    <p>¿Serás capaz de ahorrar?</p>
                 </div>
-                <div class="juego">
-                    <div class="icono" style="background: #FFECB3">🛡️</div>
-                    <h3>Defensa Segura</h3>
-                    <p>Protege tu cuenta</p>
-                </div>
-            </div>
+                <div class="juego" onclick="mostrarPopup('Reto Presupuesto', '¿Cuál es la forma más eficaz de gestionar un presupuesto personal?', 'Seguir un presupuesto muy estricto', 'Crear un presupuesto flexible y ajustarlo según los gastos', 'presupuesto')">
+    <div class="icono" style="background: #e2ffdf">🛡️</div>
+    <h3>Presupuesto</h3>
+    <p>¿Puedes gestionar tu dinero de manera eficiente?</p>
+</div>
 
-            <div class="container">
-                <!-- Mostrar el valor de seguridad -->
-                <div class="metrica">
-                    <h3>Seguridad</h3>
-                    <div class="valor" id="seguridad">🛡️ 0%</div>
-                </div>
+<div class="juego" onclick="mostrarPopup('Reto Interés', '¿Qué opción genera más ganancias a largo plazo?', 'Invertir todo en el mercado inmobiliario', 'Reinvertir los intereses generados por tus inversiones', 'interés')">
+    <div class="icono" style="background: #d1dfff">📈</div>
+    <h3>Interés</h3>
+    <p>¿Sabes cómo maximizar los beneficios con los intereses?</p>
+</div>
 
-                <!-- Alerta de seguridad -->
-                <div class="alertas">
-                    <h2>🔔 Alertas de Seguridad</h2>
-                    <div class="alerta-item">
-                        <span class="emoji">⚠️</span>
-                        <div>
-                            <h4>Misión de Verificación</h4>
-                            <p>Completa la autenticación</p>
-                        </div>
-                    </div>
-                </div>
+<div class="juego" onclick="mostrarPopup('Reto Diversificación', '¿Cuál es la mejor estrategia para reducir riesgos en tus inversiones?', 'Invertir solo en un sector', 'Diversificar en varios sectores y activos', 'diversificación')">
+    <div class="icono" style="background: #e8f7fa">🌐</div>
+    <h3>Diversificación</h3>
+    <p>¿Sabes cómo reducir los riesgos de tus inversiones?</p>
+</div>
 
-                <!-- Alerta de SMS (oculta inicialmente) -->
-                <div id="alerta-sms" style="display: none;">
-                    <p>Has recibido un SMS sospechoso: "¡Has ganado un Samsung Galaxy! Pulsa este enlace: <a href="#">linkmalicioso.com</a>"</p>
-                    <button onclick="actualizarSeguridad(false)">Clicar enlace</button>
-                    <button onclick="actualizarSeguridad(true)">Desechar SMS</button>
-                </div>
+<div class="juego" onclick="mostrarPopup('Reto Ingresos Pasivos', '¿Cómo lograr ingresos pasivos de forma eficaz?', 'Invertir en bienes raíces para alquilar', 'Crear un negocio en línea que genere ingresos automáticos', 'ingresos_pasivos')">
+    <div class="icono" style="background: #f1f8e9">💼</div>
+    <h3>Ingresos Pasivos</h3>
+    <p>¿Sabes cómo generar ingresos sin trabajar activamente?</p>
+</div>
 
-                <!-- Botón para mostrar la alerta de SMS -->
-                <button onclick="mostrarAlertaSMS()">Mostrar Alerta</button>
+<div class="juego" onclick="mostrarPopup('Reto Ahorro Fiscal', '¿Cuál es la mejor forma de optimizar tus impuestos?', 'Invertir en bienes de consumo para reducir impuestos', 'Utilizar incentivos fiscales como cuentas de ahorro para la jubilación', 'ahorro_fiscal')">
+    <div class="icono" style="background: #fff3e0">💸</div>
+    <h3>Ahorro Fiscal</h3>
+    <p>¿Sabes cómo reducir tu carga tributaria legalmente?</p>
+</div>
+
+<div class="juego" onclick="mostrarPopup('Reto Deuda', '¿Qué opción es más efectiva para salir de deudas?', 'Pagar el mínimo en todas tus deudas', 'Consolidar tus deudas y hacer un plan de pago estratégico', 'deuda')">
+    <div class="icono" style="background: #ffebee">💳</div>
+    <h3>Deuda</h3>
+    <p>¿Cómo gestionar las deudas de manera efectiva?</p>
+</div>
+
+<div class="juego" onclick="mostrarPopup('Reto Fondos de Emergencia', '¿Cuál es la mejor manera de crear un fondo de emergencia?', 'Ahorrar un pequeño porcentaje de tus ingresos mensuales', 'Invertir en activos de alto rendimiento que se puedan liquidar rápidamente', 'fondos_emergencia')">
+    <div class="icono" style="background: #e8f5e9">🚑</div>
+    <h3>Fondos de Emergencia</h3>
+    <p>¿Estás preparado para cualquier imprevisto financiero?</p>
+</div>
             </div>
         </div>
+
+        
+        <div class="">
+            <div class="alerta-item" style="cursor: pointer;" onclick="mostrarAlertaSMS()">
+                        <span class="emoji">⚠️ Nuevo mensaje!</span>
+                        <div id="alerta-sms" style="display: none;">
+                            <p>¡Has ganado un Samsung Galaxy! Pulsa este enlace: <a href="#">linkmalicioso.com</a></p>
+                            <button onclick="actualizarSeguridad(false)">Clicar enlace</button>
+                            <button onclick="actualizarSeguridad(true)">Desechar SMS</button>
+                        </div>
+                    </div>
+        </div>
+
     </div>
 
-    <!-- Popup -->
+
     <div id="popup" class="popup">
         <div class="popup-contenido">
             <span class="cerrar" onclick="cerrarPopup()">&times;</span>
             <h2 id="popup-titulo"></h2>
             <p id="popup-pregunta"></p>
+            <p id="timer" style="font-weight:bold;"></p>
             <button id="respuesta-correcta" onclick="verificarRespuesta(false)"></button>
             <button id="respuesta-incorrecta" onclick="verificarRespuesta(true)"></button>
         </div>
     </div>
 
     <script>
+        let timerInterval;
         function mostrarPopup(titulo, pregunta, respuestaCorrecta, respuestaIncorrecta, metrica) {
             document.getElementById('popup-titulo').innerText = titulo;
             document.getElementById('popup-pregunta').innerText = pregunta;
@@ -286,19 +389,62 @@
             document.getElementById('popup').style.display = 'block';
             document.getElementById('respuesta-correcta').setAttribute('data-metrica', metrica);
             document.getElementById('respuesta-incorrecta').setAttribute('data-metrica', metrica);
+            iniciarContador();
+        }
+
+        function iniciarContador() {
+            let timeLeft = 20000; // 20 segundos en milisegundos
+            document.getElementById('timer').innerText = `Tiempo restante: ${(timeLeft / 1000).toFixed(2)}s`;
+            timerInterval = setInterval(() => {
+                timeLeft -= 100;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    cerrarPopup();
+                    return;
+                }
+                document.getElementById('timer').innerText = `Tiempo restante: ${(timeLeft / 1000).toFixed(2)}s`;
+            }, 100);
         }
 
         function cerrarPopup() {
+            clearInterval(timerInterval);
             document.getElementById('popup').style.display = 'none';
         }
 
         function verificarRespuesta(esCorrecta) {
-            const metrica = esCorrecta ? document.getElementById('respuesta-incorrecta').getAttribute('data-metrica') : document.getElementById('respuesta-correcta').getAttribute('data-metrica');
-            const valorActual = parseFloat(document.getElementById(metrica).innerText);
-            const nuevoValor = esCorrecta ? valorActual + 10 : valorActual - 10;
-            document.getElementById(metrica).innerText = nuevoValor + '%';
+            const metrica = esCorrecta
+                ? document.getElementById('respuesta-incorrecta').getAttribute('data-metrica')
+                : document.getElementById('respuesta-correcta').getAttribute('data-metrica');
+
+            const elemento = document.getElementById(metrica);
+            const textoActual = elemento.innerText;
+
+            if (metrica === 'ibercoins') {
+                if (esCorrecta) {
+                    // Si se hace clic en "respuesta-incorrecta", ibercoins se va a 0
+                    elemento.innerText = '€0';
+                } else {
+                    // Si se hace clic en "respuesta-correcta", se suma 10
+                    const valorNumerico = parseFloat(textoActual.replace('€', ''));
+                    const nuevoValor = valorNumerico + 10;
+                    elemento.innerText = `€${nuevoValor}`;
+                }
+            } else {
+                // Para otras métricas
+                const valorNumerico = parseFloat(textoActual.replace('%', ''));
+                // Usamos la misma lógica anterior
+                const nuevoValor = esCorrecta ? valorNumerico + 10 : Math.max(0, valorNumerico - 20);
+                elemento.innerText = `${nuevoValor}%`;
+            }
             cerrarPopup();
         }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const ibercoinsElement = document.getElementById('ibercoins');
+            if(!ibercoinsElement.innerText || ibercoinsElement.innerText === '€0') {
+                ibercoinsElement.innerText = '€100';
+            }
+        });
 
         function mostrarAlertaSMS() {
             document.getElementById("alerta-sms").style.display = "block";
@@ -306,10 +452,8 @@
 
         function actualizarSeguridad(esCorrecta) {
             const valorActual = parseFloat(document.getElementById('seguridad').innerText.replace('🛡️ ', ''));
-            const nuevoValor = esCorrecta ? valorActual + 10 : valorActual - 10;
+            const nuevoValor = esCorrecta ? valorActual + 10 : valorActual - 100;
             document.getElementById('seguridad').innerText = '🛡️ ' + nuevoValor + '%';
             document.getElementById("alerta-sms").style.display = "none";
         }
     </script>
-</body>
-</html>

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("iberPlay")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+54de8d0bfd85a32ed7d7fc0d2411e0411686a045")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+59c094b4d80faac88b1f78f5349987553b5e7662")]
 [assembly: System.Reflection.AssemblyProductAttribute("iberPlay")]
 [assembly: System.Reflection.AssemblyTitleAttribute("iberPlay")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
